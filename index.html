@@ -18,7 +18,6 @@
   --semi:#f59e0b;--semi-dim:rgba(245,158,11,.18);
   --auth:#ef4444;--auth-dim:rgba(239,68,68,.18);
   --junta:#9b59b6;--junta-dim:rgba(155,89,182,.18);
-  --conflict:#6b7280;--conflict-dim:rgba(107,114,128,.18);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;background:var(--bg);overflow:hidden;font-family:'Rajdhani',sans-serif;color:var(--text);}
@@ -44,7 +43,6 @@ html,body{width:100%;height:100%;background:var(--bg);overflow:hidden;font-famil
 .fbtn[data-r="democratic"].active{background:var(--democratic-dim);border-color:var(--democratic);color:var(--democratic);}
 .fbtn[data-r="semi-democratic"].active{background:var(--semi-dim);border-color:var(--semi);color:var(--semi);}
 .fbtn[data-r="authoritarian"].active{background:var(--auth-dim);border-color:var(--auth);color:var(--auth);}
-.fbtn[data-r="junta"].active{background:var(--junta-dim);border-color:var(--junta);color:var(--junta);}
 .div{width:1px;height:22px;background:var(--border);}
 .abtn{padding:5px 13px;border-radius:3px;border:1px solid var(--border2);background:rgba(255,255,255,.05);
   color:var(--text);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;
@@ -155,7 +153,6 @@ body.paused #ms animate{animation-play-state:paused;}
     <button class="fbtn" data-r="democratic">Democratic</button>
     <button class="fbtn" data-r="semi-democratic">Hybrid</button>
     <button class="fbtn" data-r="authoritarian">Authoritarian</button>
-    <button class="fbtn" data-r="junta">Military Junta</button>
     <div class="div"></div>
     <button class="abtn" id="pauseBtn">⏸ Pause</button>
     <button class="abtn dl" id="dlBtn">⬇ Export PNG</button>
@@ -173,13 +170,15 @@ body.paused #ms animate{animation-play-state:paused;}
   <div class="li" data-r="democratic"><div class="ldot" style="background:#10b981"></div><span class="ll">Democratic</span><span class="lc" id="lc-dem">—</span></div>
   <div class="li" data-r="semi-democratic"><div class="ldot" style="background:#f59e0b"></div><span class="ll">Hybrid / Semi</span><span class="lc" id="lc-semi">—</span></div>
   <div class="li" data-r="authoritarian"><div class="ldot" style="background:#ef4444"></div><span class="ll">Authoritarian</span><span class="lc" id="lc-auth">—</span></div>
-  <div class="li" data-r="junta"><div class="ldot" style="background:#9b59b6"></div><span class="ll">Military Junta</span><span class="lc" id="lc-junta">—</span></div>
-  <div class="li" data-r="conflict"><div class="ldot" style="background:#6b7280"></div><span class="ll">Lack of Info</span><span class="lc" id="lc-con">—</span></div>
   <hr class="lsep"/>
   <div class="lsec-ttl" style="margin-bottom:10px">Map Indicators</div>
   <div class="lann">
     <svg width="18" height="18"><circle cx="9" cy="9" r="2.5" fill="#f0c040"/><circle cx="9" cy="9" r="6.5" fill="none" stroke="#f0c040" stroke-width="1" opacity=".5"/></svg>
     Latest election held
+  </div>
+  <div class="lann">
+    <svg width="18" height="18"><circle cx="9" cy="9" r="5" fill="#9b59b6" stroke="#c88be0" stroke-width="1"/></svg>
+    Active military junta
   </div>
   <div class="lann">
     <svg width="18" height="18"><text x="9" y="13" text-anchor="middle" font-size="11" fill="#ef4444">♛</text></svg>
@@ -229,7 +228,7 @@ const CD = {
   24:{n:"Angola",f:"🇦🇴",r:"semi-democratic",l:"João Lourenço",s:2017,e:[{y:2022,t:"General"}],a:false,note:"MPLA in power since 1975. Internal transition from dos Santos (38 yrs). 2022 elections competitive but results disputed by opposition."},
   204:{n:"Benin",f:"🇧🇯",r:"semi-democratic",l:"Patrice Talon",s:2016,e:[{y:2021,t:"Presidential"},{y:2026,t:"Presidential"}],a:false,note:"Re-elected 2021. Main opposition parties barred from participation. Civil society space tightening. Presidential election due 2026."},
   72:{n:"Botswana",f:"🇧🇼",r:"democratic",l:"Duma Boko",s:2024,e:[{y:2024,t:"General"}],a:true,note:"Historic alternance Oct 2024 — UDC ended 58 consecutive years of BDP rule in a stunning electoral upset."},
-  854:{n:"Burkina Faso",f:"🇧🇫",r:"junta",l:"Capt. Ibrahim Traoré",s:2022,e:[],a:false,note:"Military coup Sept 2022. Constitution suspended. Ongoing jihadist insurgency. Wagner Group presence. Alliance of Sahel States (AES)."},
+  854:{n:"Burkina Faso",f:"🇧🇫",r:"authoritarian",l:"Capt. Ibrahim Traoré",s:2022,e:[],a:false,j:true,note:"Military coup Sept 2022. Constitution suspended. Ongoing jihadist insurgency. Wagner Group presence. Alliance of Sahel States (AES)."},
   108:{n:"Burundi",f:"🇧🇮",r:"authoritarian",l:"Évariste Ndayishimiye",s:2020,e:[{y:2020,t:"Presidential"}],a:false,note:"CNDD-FDD dominant since 2005. Ndayishimiye took office after president Nkurunziza's sudden death. Previously Nkurunziza defied 2-term limit in 2015."},
   120:{n:"Cameroon",f:"🇨🇲",r:"authoritarian",l:"Paul Biya",s:1982,e:[{y:2020,t:"Legislative"},{y:2025,t:"Presidential"}],a:false,note:"Paul Biya: 43+ years in power, one of the world's longest-serving leaders. Severe Anglophone crisis ongoing since 2016. CPDM party entrenched."},
   132:{n:"Cape Verde",f:"🇨🇻",r:"democratic",l:"José Maria Neves",s:2021,e:[{y:2021,t:"Presidential & Legislative"}],a:false,note:"Consistently ranked Africa's most stable democracy. Free, fair elections. Peaceful transitions are the norm."},
@@ -243,36 +242,36 @@ const CD = {
   226:{n:"Equatorial Guinea",f:"🇬🇶",r:"authoritarian",l:"Teodoro Obiang Nguema",s:1979,e:[{y:2022,t:"Presidential & Legislative"}],a:false,note:"Longest-serving president globally (45+ years). Oil wealth concentrated in Obiang family. His son Teodorin is VP. Human rights record among Africa's worst."},
   232:{n:"Eritrea",f:"🇪🇷",r:"authoritarian",l:"Isaias Afwerki",s:1993,e:[],a:false,note:"NO elections since independence in 1993. One-party PFDJ state. Indefinite military conscription. Ranked most repressive state in Africa."},
   231:{n:"Ethiopia",f:"🇪🇹",r:"semi-democratic",l:"Abiy Ahmed",s:2018,e:[{y:2021,t:"General"},{y:2026,t:"General"}],a:false,note:"Nobel Peace Prize 2019, then devastating Tigray civil war (2020-22). Increasingly centralized under Prosperity Party. General election due 2026."},
-  266:{n:"Gabon",f:"🇬🇦",r:"junta",l:"Gen. Brice Oligui Nguema",s:2023,e:[{y:2025,t:"Presidential (transitional)"}],a:false,note:"Military coup Aug 2023 ended the 56-year Bongo dynasty. Oligui 'elected' in controlled transitional vote 2025. Formal civilian transition promised but uncertain."},
+  266:{n:"Gabon",f:"🇬🇦",r:"authoritarian",l:"Gen. Brice Oligui Nguema",s:2023,e:[{y:2025,t:"Presidential (transitional)"}],a:false,note:"Military coup Aug 2023 ended the 56-year Bongo dynasty. Oligui 'elected' in controlled transitional vote 2025 with 95% of the vote. Sworn in as civilian president May 2025 for a 7-year term; transition formally completed."},
   270:{n:"Gambia",f:"🇬🇲",r:"semi-democratic",l:"Adama Barrow",s:2017,e:[{y:2021,t:"Presidential"}],a:false,note:"Barrow re-elected Dec 2021. Succeeded dictator Yahya Jammeh (22 yrs) in landmark 2017 ECOWAS-brokered transfer. Reconciliation ongoing."},
   288:{n:"Ghana",f:"🇬🇭",r:"democratic",l:"John Mahama",s:2025,e:[{y:2024,t:"Presidential & Legislative"}],a:true,note:"Peaceful alternance Dec 2024: Mahama (NDC) defeated Bawumia (NPP). Ghana's 8th peaceful transfer of power since 1993. Model for Africa."},
-  324:{n:"Guinea",f:"🇬🇳",r:"junta",l:"Col. Mamadi Doumbouya",s:2021,e:[{y:2025,t:"Legislative (planned)"}],a:false,note:"Coup Sept 2021 ousted Alpha Condé. CNRD military junta in power. Legislative elections planned for 2025 after repeated delays. V-Dem: Closed Autocracy. AES-aligned."},
-  624:{n:"Guinea-Bissau",f:"🇬🇼",r:"junta",l:"Umaro Sissoco Embaló",s:2020,e:[{y:2023,t:"Legislative"}],a:false,note:"Embaló dissolved parliament multiple times and rules by decree. Persistent political instability — 9 coups or attempts since 1974. Drug trafficking influence. De facto military-backed rule."},
+  324:{n:"Guinea",f:"🇬🇳",r:"authoritarian",l:"Col. Mamadi Doumbouya",s:2021,e:[{y:2025,t:"Legislative (planned)"}],a:false,j:true,note:"Coup Sept 2021 ousted Alpha Condé. CNRD military junta in power. Legislative elections planned for 2025 after repeated delays. V-Dem: Closed Autocracy. AES-aligned."},
+  624:{n:"Guinea-Bissau",f:"🇬🇼",r:"authoritarian",l:"High Military Command (Gen. Horta Inta-A)",s:2025,e:[{y:2023,t:"Legislative"},{y:2025,t:"Presidential (annulled)"}],a:false,j:true,note:"Coup 26 Nov 2025: military ousted President Embaló on the eve of the presidential election results. High Military Command for the Restoration of National Security and Public Order in power. 9 coups/attempts since independence 1974."},
   384:{n:"Ivory Coast",f:"🇨🇮",r:"semi-democratic",l:"Alassane Ouattara",s:2011,e:[{y:2020,t:"Presidential"},{y:2025,t:"Presidential"}],a:false,note:"Controversial 3rd term 2020 after constitutional reset. Ouattara declared he won't seek 4th term. Presidential election Oct 2025 — first competitive race since 2010."},
   404:{n:"Kenya",f:"🇰🇪",r:"democratic",l:"William Ruto",s:2022,e:[{y:2022,t:"Presidential"}],a:true,note:"2022 alternance: Ruto defeated Raila Odinga (backed by Kenyatta). V-Dem classifies as Electoral Democracy. Youth #RejectFinanceBill protests paralyzed Nairobi in 2024, showing robust civil society."},
   426:{n:"Lesotho",f:"🇱🇸",r:"semi-democratic",l:"Sam Matekane",s:2022,e:[{y:2022,t:"General"}],a:true,note:"Businessman Matekane won 2022 with new party Revolution for Prosperity. Lesotho has had 9 governments in 10 years."},
   430:{n:"Liberia",f:"🇱🇷",r:"democratic",l:"Joseph Boakai",s:2024,e:[{y:2023,t:"Presidential (runoff)"}],a:true,note:"Peaceful alternance Jan 2024: Boakai (UP) defeated incumbent George Weah (CDC) in close runoff. Democratic consolidation praised."},
-  434:{n:"Libya",f:"🇱🇾",r:"conflict",l:"GNU + GNS (fragmented)",s:2014,e:[],a:false,note:"Divided between GNU (Tripoli) and GNS (Tobruk/Benghazi) since 2014. No national elections. Russia, Turkey, UAE all interfere. Oil state collapse."},
+  434:{n:"Libya",f:"🇱🇾",r:"authoritarian",l:"GNU + GNS (fragmented)",s:2014,e:[],a:false,note:"Divided between GNU (Tripoli) and GNS (Tobruk/Benghazi) since 2014. No national elections. Russia, Turkey, UAE all interfere. Oil state collapse."},
   450:{n:"Madagascar",f:"🇲🇬",r:"semi-democratic",l:"Andry Rajoelina",s:2019,e:[{y:2023,t:"Presidential"}],a:false,note:"Re-elected Nov 2023; opposition boycotted citing process irregularities. Rajoelina led 2009 coup. One of world's poorest countries."},
   454:{n:"Malawi",f:"🇲🇼",r:"democratic",l:"Lazarus Chakwera",s:2020,e:[{y:2020,t:"Presidential (re-run)"},{y:2025,t:"Presidential"}],a:true,note:"Historic 2020: Constitutional Court annulled 2019 result. Chakwera won rerun — Africa's democratic milestone. Presidential election due 2025."},
-  466:{n:"Mali",f:"🇲🇱",r:"junta",l:"Col. Assimi Goïta",s:2021,e:[],a:false,note:"2nd coup May 2021. French Barkhane troops expelled 2022. Wagner Group active. AES alliance with Burkina/Niger. Over 5M displaced."},
+  466:{n:"Mali",f:"🇲🇱",r:"authoritarian",l:"Col. Assimi Goïta",s:2021,e:[],a:false,j:true,note:"2nd coup May 2021. French Barkhane troops expelled 2022. Wagner Group active. AES alliance with Burkina/Niger. Over 5M displaced."},
   478:{n:"Mauritania",f:"🇲🇷",r:"semi-democratic",l:"Mohamed Ould Ghazouani",s:2019,e:[{y:2024,t:"Presidential"}],a:false,note:"Re-elected June 2024. Relatively stable for the Sahel. Successful, rare transfer from previous president (Aziz). Racial tensions persist."},
   480:{n:"Mauritius",f:"🇲🇺",r:"democratic",l:"Navin Ramgoolam",s:2024,e:[{y:2024,t:"General"}],a:true,note:"Landslide alternance Nov 2024: Pravind Jugnauth ousted after phone-tapping scandal. Ramgoolam's 3rd PM term. Africa's top democracy index ranking."},
   504:{n:"Morocco",f:"🇲🇦",r:"semi-democratic",l:"King Mohammed VI / PM Akhannouch",s:1999,e:[{y:2021,t:"Parliamentary"}],a:false,note:"Constitutional monarchy. Palace retains decisive executive power. RNI won 2021 parliamentary elections. Arab Spring protests managed via limited reform. Freedom of press and assembly restricted."},
   508:{n:"Mozambique",f:"🇲🇿",r:"semi-democratic",l:"Daniel Chapo",s:2025,e:[{y:2024,t:"Presidential"}],a:false,note:"Disputed Oct 2024 election triggered mass protests (250+ deaths). Frelimo in power since independence 1975. Northern Cabo Delgado insurgency."},
   516:{n:"Namibia",f:"🇳🇦",r:"democratic",l:"Netumbo Nandi-Ndaitwah",s:2024,e:[{y:2024,t:"Presidential"}],a:false,note:"First female president of Namibia, elected Nov 2024. SWAPO retained power with reduced majority (51%). Strong democratic institutions."},
-  562:{n:"Niger",f:"🇳🇪",r:"junta",l:"Gen. Abdourahamane Tchiani",s:2023,e:[],a:false,note:"Coup July 2023 ousted elected president Bazoum (still detained). French troops expelled. AES alliance. US base closed. ECOWAS sanctions imposed."},
+  562:{n:"Niger",f:"🇳🇪",r:"authoritarian",l:"Gen. Abdourahamane Tchiani",s:2023,e:[],a:false,j:true,note:"Coup July 2023 ousted elected president Bazoum (still detained). French troops expelled. AES alliance. US base closed. ECOWAS sanctions imposed."},
   566:{n:"Nigeria",f:"🇳🇬",r:"semi-democratic",l:"Bola Tinubu",s:2023,e:[{y:2023,t:"Presidential & General"}],a:false,note:"APC retained power 2023 in contested election. Fuel subsidy removal caused economic hardship. #EndBadGovernance protests 2024. Africa's largest economy."},
   646:{n:"Rwanda",f:"🇷🇼",r:"authoritarian",l:"Paul Kagame",s:2000,e:[{y:2024,t:"Presidential"}],a:false,note:"Re-elected July 2024 with 99.18% of votes. Remarkable development record (Vision 2050). No meaningful political opposition permitted. Accused of DRC M23 support."},
   678:{n:"São Tomé & Príncipe",f:"🇸🇹",r:"democratic",l:"Carlos Vila Nova",s:2021,e:[{y:2021,t:"Presidential"},{y:2022,t:"Legislative"}],a:false,note:"Stable multi-party democracy — one of Africa's smallest states. Regular competitive elections. Independent judiciary. No military."},
   686:{n:"Senegal",f:"🇸🇳",r:"democratic",l:"Bassirou Diomaye Faye",s:2024,e:[{y:2024,t:"Presidential"}],a:true,note:"Historic alternance March 2024: Faye released from prison only 10 days before winning presidency at 44. Macky Sall's 12-year tenure ended. Youngest elected African president."},
   690:{n:"Seychelles",f:"🇸🇨",r:"democratic",l:"Wavel Ramkalawan",s:2020,e:[{y:2020,t:"Presidential"}],a:true,note:"Landmark 2020 alternance: Ramkalawan ended 43 years of PL/SPPF rule on his 6th attempt. Island democracy model. High HDI for Africa."},
   694:{n:"Sierra Leone",f:"🇸🇱",r:"semi-democratic",l:"Julius Maada Bio",s:2018,e:[{y:2023,t:"Presidential"}],a:false,note:"Re-elected June 2023 in a disputed vote — APC opposition rejected results citing irregularities, ECOWAS mediators called for an audit. V-Dem classifies as Electoral Autocracy. Post-war democratic institutions remain fragile."},
-  706:{n:"Somalia",f:"🇸🇴",r:"conflict",l:"Hassan Sheikh Mohamud",s:2022,e:[{y:2022,t:"Indirect (parliament)"},{y:2026,t:"Indirect (parliament)"}],a:false,note:"Indirect clan-based electoral system. Al-Shabaab controls ~20% of territory. No direct popular vote. Next indirect election due 2026."},
+  706:{n:"Somalia",f:"🇸🇴",r:"authoritarian",l:"Hassan Sheikh Mohamud",s:2022,e:[{y:2022,t:"Indirect (parliament)"},{y:2026,t:"Indirect (parliament)"}],a:false,note:"Indirect clan-based electoral system. Al-Shabaab controls ~20% of territory. No direct popular vote. Next indirect election due 2026."},
   710:{n:"South Africa",f:"🇿🇦",r:"democratic",l:"Cyril Ramaphosa",s:2018,e:[{y:2024,t:"General"}],a:false,note:"ANC lost absolute majority for first time (40%) May 2024. Historic Government of National Unity formed with DA and IFP. ANC's 30-year dominance ends."},
   716:{n:"Zimbabwe",f:"🇿🇼",r:"semi-democratic",l:"Emmerson Mnangagwa",s:2017,e:[{y:2023,t:"Presidential"}],a:false,note:"Re-elected 2023; CCC opposition disputed results. ZANU-PF in power since 1980. Economic collapse. Mnangagwa removed Mugabe in 2017 coup."},
   728:{n:"South Sudan",f:"🇸🇸",r:"authoritarian",l:"Salva Kiir",s:2011,e:[{y:2026,t:"Presidential"}],a:false,note:"Elections repeatedly postponed, now scheduled 2026. Civil war 2013-18: 400,000+ deaths. Fragile Revitalized Peace Agreement. World's newest and most fragile state."},
-  729:{n:"Sudan",f:"🇸🇩",r:"conflict",l:"Gen. al-Burhan (SAF)",s:2019,e:[],a:false,note:"Civil war since April 2023: SAF vs. RSF (Hemeti). 25M facing famine. World's largest displacement crisis (11M+). Khartoum virtually destroyed."},
+  729:{n:"Sudan",f:"🇸🇩",r:"authoritarian",l:"Gen. al-Burhan (SAF)",s:2021,e:[],a:false,j:true,note:"Military junta led by al-Burhan since Oct 2021 coup. Civil war since April 2023: SAF vs. RSF (Hemeti). 25M facing famine. World's largest displacement crisis (11M+). Khartoum virtually destroyed."},
   748:{n:"Eswatini",f:"🇸🇿",r:"authoritarian",l:"King Mswati III",s:1986,e:[{y:2023,t:"Parliamentary (no parties)"}],a:false,note:"Last absolute monarchy in sub-Saharan Africa. Political parties banned since 1973. Pro-democracy protests violently suppressed 2021. SADC mediation failed. Reclassified as authoritarian given no political pluralism."},
   834:{n:"Tanzania",f:"🇹🇿",r:"semi-democratic",l:"Samia Suluhu Hassan",s:2021,e:[{y:2025,t:"Presidential"}],a:false,note:"First female Tanzanian president; took office after John Magufuli died (2021). CCM in power since 1977. Presidential elections due Oct 2025."},
   768:{n:"Togo",f:"🇹🇬",r:"authoritarian",l:"Faure Gnassingbé",s:2005,e:[{y:2020,t:"Presidential"},{y:2024,t:"Parliamentary"},{y:2025,t:"Presidential"}],a:false,note:"Gnassingbé family in power since 1967 — 57+ years. Constitutional reform 2024 created PM system. Gnassingbé repositioned as PM/President. Presidential election 2025."},
@@ -283,15 +282,15 @@ const CD = {
 
 const AFRICAN_IDS=new Set([12,24,204,72,854,108,120,132,140,148,174,178,180,262,818,226,232,231,266,270,288,324,624,384,404,426,430,434,450,454,466,478,480,504,508,516,562,566,646,678,686,690,694,706,710,716,728,729,748,834,768,788,800,894]);
 
-const RC={democratic:'#10b981','semi-democratic':'#f59e0b',authoritarian:'#ef4444',junta:'#9b59b6',conflict:'#6b7280'};
-const RFILL={democratic:'rgba(16,185,129,.72)','semi-democratic':'rgba(245,158,11,.72)',authoritarian:'rgba(239,68,68,.72)',junta:'rgba(155,89,182,.72)',conflict:'rgba(107,114,128,.5)'};
-const RNAMES={democratic:'Democratic','semi-democratic':'Hybrid / Semi-Democratic',authoritarian:'Authoritarian',junta:'Military Junta',conflict:'Lack of Info'};
+const RC={democratic:'#10b981','semi-democratic':'#f59e0b',authoritarian:'#ef4444'};
+const RFILL={democratic:'rgba(16,185,129,.72)','semi-democratic':'rgba(245,158,11,.72)',authoritarian:'rgba(239,68,68,.72)'};
+const RNAMES={democratic:'Democratic','semi-democratic':'Hybrid / Semi-Democratic',authoritarian:'Authoritarian'};
 
 // ── STATS ──
 const entries=Object.values(CD);
 const totalElec=entries.reduce((a,c)=>a+c.e.length,0);
 const totalAlt=entries.filter(c=>c.a).length;
-const totalJunta=entries.filter(c=>c.r==='junta').length;
+const totalJunta=entries.filter(c=>c.j===true).length;
 const noElec=entries.filter(c=>c.r==='authoritarian').length;
 document.getElementById('sc-elec').textContent=totalElec;
 document.getElementById('sc-alt').textContent=totalAlt;
@@ -301,8 +300,6 @@ const rcnt={};entries.forEach(c=>{rcnt[c.r]=(rcnt[c.r]||0)+1;});
 document.getElementById('lc-dem').textContent=rcnt.democratic||0;
 document.getElementById('lc-semi').textContent=rcnt['semi-democratic']||0;
 document.getElementById('lc-auth').textContent=rcnt.authoritarian||0;
-document.getElementById('lc-junta').textContent=rcnt.junta||0;
-document.getElementById('lc-con').textContent=rcnt.conflict||0;
 
 // ═══════════════════════════════════════════════════════════
 //  MAP SETUP
@@ -474,6 +471,19 @@ function drawIndicators(){
         .attr('text-anchor','middle').attr('dominant-baseline','middle')
         .attr('font-size','10px').text('♛')
         .attr('fill','#ef4444').attr('opacity',.9);
+    }
+
+    // Active military junta: purple dot on country center
+    if(info.j===true){
+      const jG=g.append('g');
+      jG.append('circle')
+        .attr('cx',0).attr('cy',0).attr('r',5)
+        .attr('fill','#9b59b6').attr('stroke','#c88be0').attr('stroke-width',1.2)
+        .attr('opacity',.95);
+      // Subtle pulse animation
+      jG.append('animate')
+        .attr('attributeName','opacity')
+        .attr('values','0.85;1;0.85').attr('dur','2.5s').attr('repeatCount','indefinite');
     }
 
     // Alternance star
@@ -705,8 +715,6 @@ document.getElementById('dlBtn').addEventListener('click',async()=>{
     {r:'democratic',c:'#10b981',n:'Democratic'},
     {r:'semi-democratic',c:'#f59e0b',n:'Hybrid / Semi'},
     {r:'authoritarian',c:'#ef4444',n:'Authoritarian'},
-    {r:'junta',c:'#9b59b6',n:'Military Junta'},
-    {r:'conflict',c:'#6b7280',n:'Lack of Info'},
   ];
   const legBg=document.createElementNS('http://www.w3.org/2000/svg','rect');
   legBg.setAttribute('x',-10);legBg.setAttribute('y',-10);legBg.setAttribute('width',195);legBg.setAttribute('height',250);

@@ -174,7 +174,7 @@ body.paused #ms animate{animation-play-state:paused;}
   <div class="li" data-r="semi-democratic"><div class="ldot" style="background:#f59e0b"></div><span class="ll">Hybrid / Semi</span><span class="lc" id="lc-semi">—</span></div>
   <div class="li" data-r="authoritarian"><div class="ldot" style="background:#ef4444"></div><span class="ll">Authoritarian</span><span class="lc" id="lc-auth">—</span></div>
   <div class="li" data-r="junta"><div class="ldot" style="background:#9b59b6"></div><span class="ll">Military Junta</span><span class="lc" id="lc-junta">—</span></div>
-  <div class="li" data-r="conflict"><div class="ldot" style="background:#6b7280"></div><span class="ll">Fragile / Conflict</span><span class="lc" id="lc-con">—</span></div>
+  <div class="li" data-r="conflict"><div class="ldot" style="background:#6b7280"></div><span class="ll">Lack of Info</span><span class="lc" id="lc-con">—</span></div>
   <hr class="lsep"/>
   <div class="lsec-ttl" style="margin-bottom:10px">Map Indicators</div>
   <div class="lann">
@@ -285,7 +285,7 @@ const AFRICAN_IDS=new Set([12,24,204,72,854,108,120,132,140,148,174,178,180,262,
 
 const RC={democratic:'#10b981','semi-democratic':'#f59e0b',authoritarian:'#ef4444',junta:'#9b59b6',conflict:'#6b7280'};
 const RFILL={democratic:'rgba(16,185,129,.72)','semi-democratic':'rgba(245,158,11,.72)',authoritarian:'rgba(239,68,68,.72)',junta:'rgba(155,89,182,.72)',conflict:'rgba(107,114,128,.5)'};
-const RNAMES={democratic:'Democratic','semi-democratic':'Hybrid / Semi-Democratic',authoritarian:'Authoritarian',junta:'Military Junta',conflict:'Fragile / Conflict State'};
+const RNAMES={democratic:'Democratic','semi-democratic':'Hybrid / Semi-Democratic',authoritarian:'Authoritarian',junta:'Military Junta',conflict:'Lack of Info'};
 
 // ── STATS ──
 const entries=Object.values(CD);
@@ -706,7 +706,7 @@ document.getElementById('dlBtn').addEventListener('click',async()=>{
     {r:'semi-democratic',c:'#f59e0b',n:'Hybrid / Semi'},
     {r:'authoritarian',c:'#ef4444',n:'Authoritarian'},
     {r:'junta',c:'#9b59b6',n:'Military Junta'},
-    {r:'conflict',c:'#6b7280',n:'Fragile / Conflict'},
+    {r:'conflict',c:'#6b7280',n:'Lack of Info'},
   ];
   const legBg=document.createElementNS('http://www.w3.org/2000/svg','rect');
   legBg.setAttribute('x',-10);legBg.setAttribute('y',-10);legBg.setAttribute('width',195);legBg.setAttribute('height',250);
